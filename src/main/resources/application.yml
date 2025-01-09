@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: panorama
+
+logging:
+  level:
+    root: DEBUG
+    org:
+      springframework:
+        security:
+          web:
+            authentication: INFO
+
+panorama:
+  config:
+    authentication:
+      api-key: 49*HwbhRvxf!6vt7GnXj8xpmmZ87m9sK
+    external-services:
+      haalcentraal-brp:
+        enabled: true
+        properties:
+          api-url: http://localhost:5010/haalcentraal/api/
+          api-key: ac045222c9e7cde8120b48735560f9b920bb58cd
