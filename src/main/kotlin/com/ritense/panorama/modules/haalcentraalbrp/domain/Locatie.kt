@@ -1,0 +1,46 @@
+/*
+ * Copyright 2025 Ritense BV, the Netherlands.
+ *
+ * Licensed under EUPL, Version 1.2 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.ritense.panorama.modules.haalcentraalbrp.domain
+
+data class Locatie(
+    override val type: String = "Locatie",
+    val datumVan: AbstractDatum? = null,
+    val functieAdres: Waardetabel? = null,
+    val verblijfadres: VerblijfadresLocatie? = null,
+    val datumIngangGeldigheid: AbstractDatum? = null,
+    val indicatieVastgesteldVerblijftNietOpAdres: Boolean? = null,
+    val inOnderzoek: AdresInOnderzoek? = null,
+) : AbstractVerblijfplaats {
+    data class AdresInOnderzoek(
+        val datumIngangOnderzoek: AbstractDatum? = null,
+        val functieAdres: Boolean? = null,
+        val adresseerbaarObjectIdentificatie: Boolean? = null,
+        val nummeraanduidingIdentificatie: Boolean? = null,
+        val datumVan: Boolean? = null,
+        val datumIngangGeldigheid: Boolean? = null,
+    )
+
+    data class VerblijfadresLocatie(
+        val locatiebeschrijving: String? = null,
+        val inOnderzoek: VerblijfadresLocatieInOnderzoek? = null,
+    ) {
+        data class VerblijfadresLocatieInOnderzoek(
+            val datumIngangOnderzoek: AbstractDatum? = null,
+            val locatiebeschrijving: Boolean? = null,
+        )
+    }
+}

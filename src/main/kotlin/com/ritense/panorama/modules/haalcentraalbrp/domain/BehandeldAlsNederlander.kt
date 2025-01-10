@@ -14,26 +14,12 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama.security
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.core.GrantedAuthority
-
-class ApiKeyAuthentication(
-    private val clientId: String,
-    private val apiKey: String,
-    authorities: List<GrantedAuthority>
-) : AbstractAuthenticationToken(authorities) {
-
-    init {
-        isAuthenticated = true
-    }
-
-    override fun getCredentials(): Any {
-        return apiKey
-    }
-
-    override fun getPrincipal(): Any {
-        return clientId
-    }
+data class BehandeldAlsNederlander(
+    override val redenOpname: Waardetabel? = null,
+    override val datumIngangGeldigheid: AbstractDatum? = null,
+    val inOnderzoek: BijzonderNederlanderschapInOnderzoek? = null,
+) : AbstractNationaliteit {
+    override val type: String = "BehandeldAlsNederlander"
 }

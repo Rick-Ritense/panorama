@@ -14,26 +14,18 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama.security
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.core.GrantedAuthority
-
-class ApiKeyAuthentication(
-    private val clientId: String,
-    private val apiKey: String,
-    authorities: List<GrantedAuthority>
-) : AbstractAuthenticationToken(authorities) {
-
-    init {
-        isAuthenticated = true
-    }
-
-    override fun getCredentials(): Any {
-        return apiKey
-    }
-
-    override fun getPrincipal(): Any {
-        return clientId
-    }
+data class VerblijfplaatsOnbekend(
+    override val type: String = "VerblijfplaatsOnbekend",
+    val datumVan: AbstractDatum? = null,
+    val datumIngangGeldigheid: AbstractDatum? = null,
+    val inOnderzoek: VerblijfplaatsOnbekendInOnderzoek? = null,
+) : AbstractVerblijfplaats {
+    data class VerblijfplaatsOnbekendInOnderzoek(
+        val datumIngangOnderzoek: AbstractDatum? = null,
+        val type: Boolean? = null,
+        val datumVan: Boolean? = null,
+        val datumIngangGeldigheid: Boolean? = null,
+    )
 }

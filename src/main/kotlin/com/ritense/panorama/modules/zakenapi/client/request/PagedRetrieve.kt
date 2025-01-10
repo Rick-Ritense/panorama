@@ -14,26 +14,20 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama.security
+package com.ritense.panorama.modules.zakenapi.client.request
 
-import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.core.GrantedAuthority
+import com.ritense.panorama.modules.zakenapi.domain.ResultPage
 
-class ApiKeyAuthentication(
-    private val clientId: String,
-    private val apiKey: String,
-    authorities: List<GrantedAuthority>
-) : AbstractAuthenticationToken(authorities) {
+interface PagedRetrieve<O : PagedRetrieve<O, T>, T> : Retrieve<ResultPage<T>> {
+    fun page(page: Int): O
 
-    init {
-        isAuthenticated = true
-    }
-
-    override fun getCredentials(): Any {
-        return apiKey
-    }
-
-    override fun getPrincipal(): Any {
-        return clientId
+    suspend fun retrieveAll(): List<T> {
+        val results = mutableListOf<T>()
+        do {
+            val result = this.retrieve()
+            val next = result.next
+            results.addAll(result.results)
+        } while (next != null)
+        return results
     }
 }

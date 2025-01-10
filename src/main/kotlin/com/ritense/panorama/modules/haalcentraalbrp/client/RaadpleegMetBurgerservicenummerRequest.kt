@@ -14,26 +14,14 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama.security
+package com.ritense.panorama.modules.haalcentraalbrp.client
 
-import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.core.GrantedAuthority
+import com.fasterxml.jackson.annotation.JsonInclude
 
-class ApiKeyAuthentication(
-    private val clientId: String,
-    private val apiKey: String,
-    authorities: List<GrantedAuthority>
-) : AbstractAuthenticationToken(authorities) {
-
-    init {
-        isAuthenticated = true
-    }
-
-    override fun getCredentials(): Any {
-        return apiKey
-    }
-
-    override fun getPrincipal(): Any {
-        return clientId
-    }
-}
+@JsonInclude(JsonInclude.Include.NON_NULL)
+class RaadpleegMetBurgerservicenummerRequest(
+    override val type: String = "RaadpleegMetBurgerservicenummer",
+    val burgerservicenummer: List<String> = emptyList(),
+    val fields: List<String> = RaadpleegMetBurgerservicenummerField.asList(),
+    val gemeenteVanInschrijving: String? = null,
+) : PersoonRequest

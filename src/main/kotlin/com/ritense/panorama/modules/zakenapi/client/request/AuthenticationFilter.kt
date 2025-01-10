@@ -14,26 +14,12 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama.security
+package com.ritense.panorama.modules.zakenapi.client.request
 
-import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.core.GrantedAuthority
+interface AuthenticationFilter<T : AuthenticationFilter<T>> {
+    fun withBsn(bsn: String): T
 
-class ApiKeyAuthentication(
-    private val clientId: String,
-    private val apiKey: String,
-    authorities: List<GrantedAuthority>
-) : AbstractAuthenticationToken(authorities) {
+    fun withKvk(kvk: String): T
 
-    init {
-        isAuthenticated = true
-    }
-
-    override fun getCredentials(): Any {
-        return apiKey
-    }
-
-    override fun getPrincipal(): Any {
-        return clientId
-    }
+    fun withUid(uid: String): T
 }

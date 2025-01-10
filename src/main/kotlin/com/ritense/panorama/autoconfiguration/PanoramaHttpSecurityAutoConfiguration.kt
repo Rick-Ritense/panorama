@@ -1,7 +1,25 @@
+/*
+ * Copyright 2025 Ritense BV, the Netherlands.
+ *
+ * Licensed under EUPL, Version 1.2 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.ritense.panorama.autoconfiguration
 
+import com.ritense.panorama.contract.HttpSecurityConfigurer
+import com.ritense.panorama.security.PanoramaAuthorizationConfig
 import com.ritense.panorama.security.PanoramaTokenAuthenticationProvider
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -16,13 +34,14 @@ import org.springframework.security.web.header.HeaderWriterFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
 @EnableWebSecurity
+@EnableConfigurationProperties(PanoramaAuthorizationConfig::class)
 @Configuration
 class PanoramaHttpSecurityAutoConfiguration {
     @Bean
     fun panoramaTokenAuthenticationProvider(
-        @Value("\${panorama.config.authentication.api-key}") panoramaApiKey: String,
+        panoramaAuthorizationConfig: PanoramaAuthorizationConfig,
     ): AuthenticationProvider {
-        return PanoramaTokenAuthenticationProvider(panoramaApiKey)
+        return PanoramaTokenAuthenticationProvider(panoramaAuthorizationConfig)
     }
 
     @Bean
@@ -35,11 +54,14 @@ class PanoramaHttpSecurityAutoConfiguration {
     fun filterChain(
         httpSecurity: HttpSecurity,
         authenticationManager: AuthenticationManager,
+        httpSecurityConfigurers: List<HttpSecurityConfigurer>
     ): SecurityFilterChain {
+        httpSecurityConfigurers.forEach { it.configure(httpSecurity) }
+
         return httpSecurity
             .cors { it.disable() }
             .sessionManagement {
-                it.sessionCreationPolicy(SessionCreationPolicy.NEVER)
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .addFilterAfter(requestHeaderAuthenticationFilter(authenticationManager), HeaderWriterFilter::class.java)
             .authorizeHttpRequests {
@@ -53,6 +75,7 @@ class PanoramaHttpSecurityAutoConfiguration {
     ): RequestHeaderAuthenticationFilter {
         return RequestHeaderAuthenticationFilter().apply {
             setPrincipalRequestHeader("X-API-KEY")
+            setExceptionIfHeaderMissing(false)
             setRequiresAuthenticationRequestMatcher(
                 AntPathRequestMatcher("/api/**")
             )

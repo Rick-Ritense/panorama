@@ -16,24 +16,15 @@
 
 package com.ritense.panorama.security
 
-import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.core.GrantedAuthority
+import org.springframework.boot.context.properties.ConfigurationProperties
 
-class ApiKeyAuthentication(
-    private val clientId: String,
-    private val apiKey: String,
-    authorities: List<GrantedAuthority>
-) : AbstractAuthenticationToken(authorities) {
-
-    init {
-        isAuthenticated = true
-    }
-
-    override fun getCredentials(): Any {
-        return apiKey
-    }
-
-    override fun getPrincipal(): Any {
-        return clientId
-    }
+@ConfigurationProperties(prefix = "panorama.config.authorization")
+data class PanoramaAuthorizationConfig(
+    var clients: List<PanoramaClientApplication> = emptyList(),
+) {
+    data class PanoramaClientApplication(
+        val clientId: String = "",
+        val apiKey: String = "",
+        val roles: List<String> = emptyList(),
+    )
 }

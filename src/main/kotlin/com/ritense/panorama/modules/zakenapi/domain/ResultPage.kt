@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.ritense.panorama.modules.zakenapi.domain
 
-package com.ritense.panorama.security
+import java.net.URI
 
-import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.core.GrantedAuthority
-
-class ApiKeyAuthentication(
-    private val clientId: String,
-    private val apiKey: String,
-    authorities: List<GrantedAuthority>
-) : AbstractAuthenticationToken(authorities) {
-
-    init {
-        isAuthenticated = true
-    }
-
-    override fun getCredentials(): Any {
-        return apiKey
-    }
-
-    override fun getPrincipal(): Any {
-        return clientId
+data class ResultPage<T>(
+    val count: Int,
+    val next: URI? = null,
+    val previous: URI? = null,
+    val results: List<T>,
+) {
+    fun getNextPageNumber(): Int? {
+        return next
+            ?.query
+            ?.split("&")
+            ?.map { Pair(it.substringBefore("="), it.substringAfter("=")) }
+            ?.filter { it.first == "page" }
+            ?.map { it.second }
+            ?.map { it.toInt() }
+            ?.single()
     }
 }

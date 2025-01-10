@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.ritense.panorama.modules.zakenapi.security.config
 
-package com.ritense.panorama.autoconfiguration
-
-import com.ritense.panorama.service.PanoramaModulesService
-import org.springframework.context.annotation.Bean
+import com.ritense.panorama.contract.HttpSecurityConfigurer
+import com.ritense.panorama.modules.zakenapi.module.ZakenApiModuleRole.ZAKEN_API_GET_ZAKEN
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping
+import org.springframework.http.HttpMethod.GET
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
 
 @Configuration
-class PanoramaAutoConfiguration {
-
-    @Bean
-    fun panoramaModulesService(
-        requestMappingHandlerMapping: RequestMappingHandlerMapping
-    ): PanoramaModulesService {
-        return PanoramaModulesService(requestMappingHandlerMapping)
+class ZaakDocumentResourceHttpSecurityConfigurer : HttpSecurityConfigurer {
+    override fun configure(http: HttpSecurity) {
+        http.authorizeHttpRequests { authorize ->
+            authorize.requestMatchers(GET, "/api/v1/profile/lopende-zaken/{burgerservicenummer}")
+                .hasAnyAuthority(ZAKEN_API_GET_ZAKEN.toString())
+        }
     }
 }

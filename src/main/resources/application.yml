@@ -13,9 +13,24 @@ logging:
 
 panorama:
   config:
-    authentication:
-      api-key: 49*HwbhRvxf!6vt7GnXj8xpmmZ87m9sK
-    external-services:
+    authorization:
+      clients:
+        - client-id: some-app
+          api-key: 49*HwbhRvxf!6vt7GnXj8xpmmZ87m9sK
+          roles:
+            - HAALCENTRAAL_BRP_GET_PERSOON
+            - HAALCENTRAAL_BRP_GET_PERSONEN
+            - ZAKEN_API_GET_ZAKEN
+        - client-id: app-haalcentraal-only
+          api-key: FCMzDjxA3Me8t6vTLLmD6VovbqmQaw@H
+          roles:
+            - HAALCENTRAAL_BRP_GET_PERSOON
+            - HAALCENTRAAL_BRP_GET_PERSONEN
+        - client-id: app-zaken-only
+          api-key: iTwTRT@LBbdXyEAC.WfWCDvKimkKGTy2
+          roles:
+            - ZAKEN_API_GET_ZAKEN
+    modules:
       haalcentraal-brp:
         enabled: true
         properties:
