@@ -18,7 +18,7 @@ package com.ritense.panorama.modules.haalcentraalbrp.autoconfiguration
 
 import com.ritense.panorama.modules.haalcentraalbrp.client.HaalCentraalBrpClient
 import com.ritense.panorama.modules.haalcentraalbrp.client.HaalCentraalClientProvider
-import com.ritense.panorama.security.config.PanoramaHttpSecurityConfigurer
+import com.ritense.panorama.modules.haalcentraalbrp.security.config.HaalCentraalBrpHttpSecurityConfigurer
 import com.ritense.panorama.modules.haalcentraalbrp.service.HaalCentraalBrpService
 import com.ritense.panorama.modules.haalcentraalbrp.web.rest.HaalCentraalBrpResource
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
@@ -38,8 +38,8 @@ import org.springframework.context.annotation.Configuration
 class HaalCentraalBrpAutoConfiguration {
 
     @Bean
-    fun haalCentraalBrpHttpSecurityConfigurer(): PanoramaHttpSecurityConfigurer {
-        return PanoramaHttpSecurityConfigurer()
+    fun haalCentraalBrpHttpSecurityConfigurer(): HaalCentraalBrpHttpSecurityConfigurer {
+        return HaalCentraalBrpHttpSecurityConfigurer()
     }
 
     @Bean

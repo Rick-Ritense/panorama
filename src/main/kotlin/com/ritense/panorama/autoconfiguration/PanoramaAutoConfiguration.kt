@@ -16,6 +16,7 @@
 
 package com.ritense.panorama.autoconfiguration
 
+import com.ritense.panorama.security.config.PanoramaHttpSecurityConfigurer
 import com.ritense.panorama.service.PanoramaModulesService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -23,6 +24,11 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 @Configuration
 class PanoramaAutoConfiguration {
+
+    @Bean
+    fun panoramaHttpSecurityConfigurer(): PanoramaHttpSecurityConfigurer {
+        return PanoramaHttpSecurityConfigurer()
+    }
 
     @Bean
     fun panoramaModulesService(

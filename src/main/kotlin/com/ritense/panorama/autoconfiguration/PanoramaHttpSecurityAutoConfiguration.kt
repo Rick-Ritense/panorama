@@ -64,9 +64,6 @@ class PanoramaHttpSecurityAutoConfiguration {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .addFilterAfter(requestHeaderAuthenticationFilter(authenticationManager), HeaderWriterFilter::class.java)
-            .authorizeHttpRequests {
-                it.anyRequest().authenticated()
-            }
             .build()
     }
 

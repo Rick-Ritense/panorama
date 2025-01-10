@@ -25,7 +25,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 class ZaakDocumentResourceHttpSecurityConfigurer : HttpSecurityConfigurer {
     override fun configure(http: HttpSecurity) {
         http.authorizeHttpRequests { authorize ->
-            authorize.requestMatchers(GET, "/api/v1/profile/lopende-zaken/{burgerservicenummer}")
+            authorize.requestMatchers(GET, "/api/v1/profile/{burgerservicenummer}/lopende-zaken")
                 .hasAnyAuthority(ZAKEN_API_GET_ZAKEN.toString())
         }
     }

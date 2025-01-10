@@ -1,6 +1,8 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
 plugins {
+    war
+
     kotlin("jvm") version "2.0.20"
     kotlin("plugin.spring") version "2.0.20"
     id("org.springframework.boot") version "3.4.1"
@@ -8,7 +10,9 @@ plugins {
 }
 
 group = "com.ritense"
-version = "0.0.1-SNAPSHOT"
+version = "${project.property("version")}"
+
+apply(from = "gradle/deployment.gradle.kts")
 
 java {
     toolchain {
@@ -57,6 +61,17 @@ kotlin {
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+tasks {
+    bootRun {
+        environment("SPRING_PROFILES_ACTIVE", "localhost")
+    }
+
+    bootWar.configure {
+        archiveFileName.set("${project.name}-${project.property("version")}.war")
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
+    }
 }

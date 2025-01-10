@@ -33,7 +33,7 @@ class HaalCentraalBrpResource(private val haalCentraalBrpService: HaalCentraalBr
 
 
     @AuthorizedRole("HAALCENTRAAL_BRP_GET_PERSOON")
-    @GetMapping("/persoon/{burgerservicenummer}")
+    @GetMapping("/{burgerservicenummer}/persoon")
     suspend fun getPersoon(
         @PathVariable("burgerservicenummer") bsn: String,
     ): ResponseEntity<Persoon?> {
@@ -46,7 +46,7 @@ class HaalCentraalBrpResource(private val haalCentraalBrpService: HaalCentraalBr
     @GetMapping("/personen")
     suspend fun getPersonen(
         @RequestParam("burgerservicenummers") burgerservicenummers: List<String> = emptyList(),
-        @RequestParam("fields") fields: List<String> = emptyList(),
+        @RequestParam("fields") fields: List<String> = RaadpleegMetBurgerservicenummerField.asList(),
     ): ResponseEntity<List<Persoon>?> {
         if (burgerservicenummers.isEmpty()) {
             return ResponseEntity.badRequest().body(null)

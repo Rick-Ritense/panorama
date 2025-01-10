@@ -16,6 +16,7 @@
 package com.ritense.panorama.modules.haalcentraalbrp.security.config
 
 import com.ritense.panorama.contract.HttpSecurityConfigurer
+import com.ritense.panorama.modules.haalcentraalbrp.module.HaalCentraalModuleRole.HAALCENTRAAL_BRP_GET_PERSONEN
 import com.ritense.panorama.modules.haalcentraalbrp.module.HaalCentraalModuleRole.HAALCENTRAAL_BRP_GET_PERSOON
 import org.springframework.http.HttpMethod.GET
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -23,8 +24,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 class HaalCentraalBrpHttpSecurityConfigurer : HttpSecurityConfigurer {
     override fun configure(http: HttpSecurity) {
         http.authorizeHttpRequests { auth ->
-            auth.requestMatchers(GET, "/api/v1/profile/persoon/{burgerservicenummer}")
+            auth.requestMatchers(GET, "/api/v1/profile/{burgerservicenummer}/persoon")
                 .hasAnyAuthority(HAALCENTRAAL_BRP_GET_PERSOON.toString())
+            auth.requestMatchers(GET, "/api/v1/profile/personen")
+                .hasAnyAuthority(HAALCENTRAAL_BRP_GET_PERSONEN.toString())
         }
     }
 }

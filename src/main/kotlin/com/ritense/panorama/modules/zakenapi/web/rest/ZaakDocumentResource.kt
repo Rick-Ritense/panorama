@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController
 class ZaakDocumentResource(
     private val zakenApiService: ZakenApiService,
 ) {
-    @GetMapping(value = ["/lopende-zaken/{burgerservicenummer}"])
+    @GetMapping(value = ["{burgerservicenummer}/lopende-zaken"])
     suspend fun getContentStreaming(
         @PathVariable burgerservicenummer: String
     ): ResultPage<Zaak> {
