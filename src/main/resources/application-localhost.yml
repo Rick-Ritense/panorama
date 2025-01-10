@@ -15,7 +15,7 @@ panorama:
   config:
     authorization:
       clients:
-        - client-id: some-app
+        - client-id: app-all
           api-key: 49*HwbhRvxf!6vt7GnXj8xpmmZ87m9sK
           roles:
             - HAALCENTRAAL_BRP_GET_PERSOON

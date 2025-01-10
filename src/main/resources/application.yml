@@ -18,21 +18,19 @@ panorama:
   config:
     authorization:
       clients:
-        - client-id: gzac
-          api-key:
-          roles:
-            - HAALCENTRAAL_BRP_GET_PERSOON
-            - HAALCENTRAAL_BRP_GET_PERSONEN
-            - ZAKEN_API_GET_ZAKEN
+#        - client-id: example principal
+#          api-key: example key
+#          roles:
+#            - EXAMPLE_ROLE
     modules:
       haalcentraal-brp:
-        enabled: true
+        enabled: false
         properties:
-          api-url:
-          api-key:
+          api-url: # env
+          api-key: # env
       zakenapi:
-        enabled: true
+        enabled: false
         properties:
-          url:
-          client-id:
-          secret:
+          url: # env
+          client-id: # env
+          secret: # env
