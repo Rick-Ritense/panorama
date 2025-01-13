@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Ritense BV, the Netherlands.
+ * Copyright 2015-2023 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,7 @@
  */
 package com.ritense.panorama.modules.zakenapi.domain
 
-import java.time.LocalDate
-import java.util.*
-
-data class Zaak(
-    val uuid: UUID,
-    val url: String,
-    val identificatie: String,
+data class ZaakStatusType(
     val omschrijving: String,
-    val zaaktype: String,
-    val startdatum: LocalDate,
-    val einddatum: LocalDate?,
-    val status: String?,
-    val statusOmschrijving: String?,
-    val statusGeschiedenis: List<ZaakStatus>?
+    val isEindstatus: Boolean,
 )

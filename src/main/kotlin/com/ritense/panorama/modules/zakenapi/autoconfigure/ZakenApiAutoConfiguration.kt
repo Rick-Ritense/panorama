@@ -15,8 +15,10 @@
  */
 package com.ritense.panorama.modules.zakenapi.autoconfigure
 
+import com.ritense.panorama.modules.zakenapi.client.CatalogiApiClient
 import com.ritense.panorama.modules.zakenapi.client.ZakenApiClient
 import com.ritense.panorama.modules.zakenapi.security.config.ZaakDocumentResourceHttpSecurityConfigurer
+import com.ritense.panorama.modules.zakenapi.service.CatalogiApiService
 import com.ritense.panorama.modules.zakenapi.service.ZakenApiService
 import com.ritense.panorama.modules.zakenapi.web.rest.ZaakDocumentResource
 import com.ritense.panorama.security.config.PanoramaHttpSecurityConfigurer
@@ -38,18 +40,34 @@ import org.springframework.web.reactive.function.client.WebClient
 )
 class ZakenApiAutoConfiguration {
     @Bean
+    fun catalogiApiService(
+        catalogiApiClient: CatalogiApiClient,
+    ): CatalogiApiService {
+        return CatalogiApiService(catalogiApiClient)
+    }
+
+    @Bean
     @ConditionalOnMissingBean(ZakenApiService::class)
     fun zakenApiService(
-        zakenApiClient: ZakenApiClient
+        zakenApiClient: ZakenApiClient,
+        catalogiApiService: CatalogiApiService
     ): ZakenApiService {
         return ZakenApiService(
-            zakenApiClient
+            zakenApiClient,
+            catalogiApiService
         )
     }
 
     @Bean
     fun zakenApiConfig(): ZakenApiModuleConfiguration.ZakenApiConfig {
         return ZakenApiModuleConfiguration.ZakenApiConfig()
+    }
+
+    @Bean
+    fun catalogiApiClient(
+        catalogiApiConfig: ZakenApiModuleConfiguration
+    ): CatalogiApiClient {
+        return CatalogiApiClient(catalogiApiConfig)
     }
 
     @Bean

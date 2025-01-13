@@ -21,4 +21,5 @@ data class ZaakStatus(
     val uuid: UUID,
     val datumStatusGezet: String,
     val statustype: String,
-) {}
+    val statusOmschrijving: String?,
+)

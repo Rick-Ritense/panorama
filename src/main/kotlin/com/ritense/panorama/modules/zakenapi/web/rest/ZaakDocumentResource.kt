@@ -22,13 +22,12 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-
 @RestController
 @RequestMapping(value = ["/api/v1/profile"])
 class ZaakDocumentResource(
     private val zakenApiService: ZakenApiService,
 ) {
-    @GetMapping(value = ["{burgerservicenummer}/lopende-zaken"])
+    @GetMapping(value = ["/{burgerservicenummer}/lopende-zaken"])
     suspend fun getContentStreaming(
         @PathVariable burgerservicenummer: String
     ): ResultPage<Zaak> {
