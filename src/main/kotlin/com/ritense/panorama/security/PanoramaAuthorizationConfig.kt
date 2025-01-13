@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.security
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import org.springframework.boot.context.properties.ConfigurationProperties
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+@ConfigurationProperties(prefix = "panorama.config.authorization")
+data class PanoramaAuthorizationConfig(
+    var clients: List<PanoramaClientApplication> = emptyList(),
+) {
+    data class PanoramaClientApplication(
+        val clientId: String = "",
+        val apiKey: String = "",
+        val roles: List<String> = emptyList(),
+    )
 }

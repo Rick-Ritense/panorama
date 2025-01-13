@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.ritense.panorama.modules.zakenapi.domain
 
-package com.ritense.panorama
+import java.time.LocalDate
+import java.util.*
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
-}
+data class Zaak(
+    val uuid: UUID,
+    val url: String,
+    val identificatie: String,
+    val omschrijving: String,
+    val zaaktype: String,
+    val startdatum: LocalDate,
+    val einddatum: LocalDate?,
+    val status: String?,
+    val statusOmschrijving: String?,
+    val statusGeschiedenis: List<ZaakStatus>?
+)

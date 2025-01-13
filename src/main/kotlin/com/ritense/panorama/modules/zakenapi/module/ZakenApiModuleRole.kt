@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.zakenapi.module
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.ritense.panorama.contract.PanoramaModuleRole
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+enum class ZakenApiModuleRole : PanoramaModuleRole {
+    ZAKEN_API_GET_ZAKEN
 }

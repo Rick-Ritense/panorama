@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+@JsonTypeInfo(use = JsonTypeInfo.Id.SIMPLE_NAME, property = "type")
+@JsonSubTypes(
+    Type(Datum::class),
+    Type(DatumOnbekend::class),
+    Type(JaarDatum::class),
+    Type(JaarMaandDatum::class),
+)
+interface AbstractDatum {
+    val type: String
+    val langFormaat: String
 }

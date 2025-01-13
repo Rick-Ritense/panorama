@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.fasterxml.jackson.annotation.JsonInclude
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
-}
+@JsonInclude(JsonInclude.Include.NON_NULL)
+data class Persoon(
+    val burgerservicenummer: String? = null,
+    val geslacht: Waardetabel? = null,
+    val naam: NaamPersoon? = null,
+    val nationaliteiten: List<AbstractNationaliteit>? = null,
+    val geboorte: Geboorte? = null,
+    val verblijfplaats: AbstractVerblijfplaats? = null,
+    val gemeenteVanInschrijving: Waardetabel? = null,
+)

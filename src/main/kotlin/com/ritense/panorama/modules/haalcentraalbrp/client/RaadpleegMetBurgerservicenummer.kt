@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.client
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.ritense.panorama.modules.haalcentraalbrp.domain.Persoon
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
-}
+class RaadpleegMetBurgerservicenummer(
+    override val type: String = "RaadpleegMetBurgerservicenummer",
+    val personen: List<Persoon>,
+) : ZoekPersonenResponse

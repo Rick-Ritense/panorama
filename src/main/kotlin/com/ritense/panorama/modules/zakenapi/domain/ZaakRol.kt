@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.ritense.panorama.modules.zakenapi.domain
 
-package com.ritense.panorama
+import java.util.UUID
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
-}
+data class ZaakRol(
+    val uuid: UUID,
+    val zaak: String,
+)

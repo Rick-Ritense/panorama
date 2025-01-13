@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.zakenapi.client.request
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.ritense.panorama.modules.zakenapi.domain.ResultPage
 
-@SpringBootApplication
-class PanoramaApplication
+interface PagedRetrieve<O : PagedRetrieve<O, T>, T> : Retrieve<ResultPage<T>> {
+    fun page(page: Int): O
 
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+    suspend fun retrieveAll(): List<T> {
+        val results = mutableListOf<T>()
+        do {
+            val result = this.retrieve()
+            val next = result.next
+            results.addAll(result.results)
+        } while (next != null)
+        return results
+    }
 }

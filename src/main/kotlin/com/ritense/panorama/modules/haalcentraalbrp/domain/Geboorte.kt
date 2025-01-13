@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
-}
+data class Geboorte(
+    val datum: AbstractDatum? = null,
+    val land: Waardetabel? = null,
+    val plaats: Waardetabel? = null,
+    val inOnderzoek: GeboorteInOnderzoek? = null,
+)

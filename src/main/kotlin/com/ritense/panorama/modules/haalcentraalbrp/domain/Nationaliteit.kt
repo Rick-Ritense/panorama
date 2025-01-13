@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+data class Nationaliteit(
+    override val redenOpname: Waardetabel? = null,
+    override val datumIngangGeldigheid: AbstractDatum? = null,
+    val inOnderzoek: NationaliteitOnbekendInOnderzoek? = null,
+    val nationaliteit: Waardetabel? = null,
+) : AbstractNationaliteit {
+    override val type: String = "Nationaliteit"
 }

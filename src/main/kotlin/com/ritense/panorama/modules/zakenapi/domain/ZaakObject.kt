@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.ritense.panorama.modules.zakenapi.domain
 
-package com.ritense.panorama
+import com.fasterxml.jackson.annotation.JsonProperty
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
-}
+data class ZaakObject(
+    val url: String,
+    val uuid: String,
+    val zaak: String,
+    @JsonProperty("object") val objectUrl: String,
+    val objectType: String,
+    val objectTypeOverige: String,
+)

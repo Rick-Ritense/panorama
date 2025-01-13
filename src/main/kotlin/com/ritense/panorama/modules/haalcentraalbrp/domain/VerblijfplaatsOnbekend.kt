@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+data class VerblijfplaatsOnbekend(
+    override val type: String = "VerblijfplaatsOnbekend",
+    val datumVan: AbstractDatum? = null,
+    val datumIngangGeldigheid: AbstractDatum? = null,
+    val inOnderzoek: VerblijfplaatsOnbekendInOnderzoek? = null,
+) : AbstractVerblijfplaats {
+    data class VerblijfplaatsOnbekendInOnderzoek(
+        val datumIngangOnderzoek: AbstractDatum? = null,
+        val type: Boolean? = null,
+        val datumVan: Boolean? = null,
+        val datumIngangGeldigheid: Boolean? = null,
+    )
 }

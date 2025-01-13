@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.zakenapi.client.request
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+interface AuthenticationFilter<T : AuthenticationFilter<T>> {
+    fun withBsn(bsn: String): T
 
-@SpringBootApplication
-class PanoramaApplication
+    fun withKvk(kvk: String): T
 
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+    fun withUid(uid: String): T
 }

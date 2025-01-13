@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.ritense.panorama.contract
 
-package com.ritense.panorama
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+fun interface HttpSecurityConfigurer {
+    fun configure(http: HttpSecurity)
 }

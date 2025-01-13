@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+enum class AdellijkeTitelPredicaatSoort(private val value: String) {
+    TITLE("titel"),
+    PREDICATE("predicaat"), ;
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+    override fun toString(): String {
+        return this.value
+    }
 }

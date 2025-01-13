@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: panorama
+
+server:
+  port: 8085
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        security:
+          web:
+            authentication: INFO
+
+panorama:
+  config:
+    authorization:
+      clients:
+#        - client-id: example principal
+#          api-key: example key
+#          roles:
+#            - EXAMPLE_ROLE
+    modules:
+      haalcentraal-brp:
+        enabled: false
+        properties:
+          api-url: # env
+          api-key: # env
+      zakenapi:
+        enabled: false
+        properties:
+          url: # env
+          client-id: # env
+          secret: # env

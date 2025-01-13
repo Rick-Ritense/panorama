@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.module
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.ritense.panorama.contract.PanoramaModuleRole
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+enum class HaalCentraalModuleRole: PanoramaModuleRole {
+    HAALCENTRAAL_BRP_GET_PERSOON,
+    HAALCENTRAAL_BRP_GET_PERSONEN;
 }

@@ -14,14 +14,23 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.zakenapi.client.request
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.ritense.panorama.modules.zakenapi.domain.ZaakRol
+import java.util.UUID
 
-@SpringBootApplication
-class PanoramaApplication
+interface ZaakRollen {
+    fun search(): SearchZaakRollen
 
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+    fun get(id: UUID): GetZaakRol
 }
+
+interface SearchZaakRollen : PagedRetrieve<SearchZaakRollen, ZaakRol>, AuthenticationFilter<SearchZaakRollen> {
+    fun forZaak(zaakUrl: String): SearchZaakRollen
+
+    fun forZaak(zaakId: UUID): SearchZaakRollen
+
+    fun ofVestigingsNummer(vestigingsNummer: String): SearchZaakRollen
+}
+
+interface GetZaakRol : Retrieve<ZaakRol>

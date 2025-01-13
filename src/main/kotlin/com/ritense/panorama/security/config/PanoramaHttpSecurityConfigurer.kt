@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.ritense.panorama.security.config
 
-package com.ritense.panorama
+import com.ritense.panorama.contract.HttpSecurityConfigurer
+import org.springframework.http.HttpMethod.GET
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+class PanoramaHttpSecurityConfigurer : HttpSecurityConfigurer {
+    override fun configure(http: HttpSecurity) {
+        http.authorizeHttpRequests { auth ->
+            auth.requestMatchers(GET, "/api/v1/authorization/**").authenticated()
+        }
+    }
 }

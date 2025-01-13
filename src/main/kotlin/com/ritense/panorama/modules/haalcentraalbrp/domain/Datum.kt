@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.domain
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import java.time.LocalDate
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+data class Datum(
+    override val langFormaat: String,
+    val datum: LocalDate,
+) : AbstractDatum {
+    override val type = "Datum"
 }

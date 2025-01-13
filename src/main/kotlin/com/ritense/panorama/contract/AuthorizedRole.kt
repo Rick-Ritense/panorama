@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.contract
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import kotlin.annotation.AnnotationRetention.RUNTIME
+import kotlin.annotation.AnnotationTarget.FUNCTION
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
-}
+@Target(FUNCTION)
+@Retention(RUNTIME)
+@Repeatable
+annotation class AuthorizedRole(
+    val role: String,
+)

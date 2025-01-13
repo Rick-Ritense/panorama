@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.modules.haalcentraalbrp.client
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.fasterxml.jackson.annotation.JsonInclude
 
-@SpringBootApplication
-class PanoramaApplication
-
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
-}
+@JsonInclude(JsonInclude.Include.NON_NULL)
+class RaadpleegMetBurgerservicenummerRequest(
+    override val type: String = "RaadpleegMetBurgerservicenummer",
+    val burgerservicenummer: List<String> = emptyList(),
+    val fields: List<String> = RaadpleegMetBurgerservicenummerField.asList(),
+    val gemeenteVanInschrijving: String? = null,
+) : PersoonRequest

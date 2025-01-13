@@ -14,14 +14,26 @@
  * limitations under the License.
  */
 
-package com.ritense.panorama
+package com.ritense.panorama.security
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import org.springframework.security.authentication.AbstractAuthenticationToken
+import org.springframework.security.core.GrantedAuthority
 
-@SpringBootApplication
-class PanoramaApplication
+class ApiKeyAuthentication(
+    private val clientId: String,
+    private val apiKey: String,
+    authorities: List<GrantedAuthority>
+) : AbstractAuthenticationToken(authorities) {
 
-fun main(args: Array<String>) {
-	runApplication<PanoramaApplication>(*args)
+    init {
+        isAuthenticated = true
+    }
+
+    override fun getCredentials(): Any {
+        return apiKey
+    }
+
+    override fun getPrincipal(): Any {
+        return clientId
+    }
 }
