@@ -41,3 +41,19 @@ services:
     redis:
         image: redis:6.2.6
         container_name: redis
+
+    haalcentraal-personen:
+        container_name: haalcentraal-personen
+        image: ghcr.io/brp-api/personen-mock:2.2.1
+        platform: linux/amd64
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Release
+            - ASPNETCORE_URLS=http://+:5010
+        ports:
+            - "5010:5010"
+        networks:
+            - brp-api-network
+
+networks:
+    brp-api-network:
+        name: brp-api-network
