@@ -15,6 +15,7 @@
  */
 package com.ritense.panorama.modules.zakenapi.web.rest
 
+import com.ritense.panorama.contract.AuthorizedRole
 import com.ritense.panorama.modules.zakenapi.domain.ResultPage
 import com.ritense.panorama.modules.zakenapi.domain.Zaak
 import com.ritense.panorama.modules.zakenapi.service.ZakenApiService
@@ -24,9 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping(value = ["/api/v1/profile"])
-class ZaakDocumentResource(
+class ZaakResource(
     private val zakenApiService: ZakenApiService,
 ) {
+    @AuthorizedRole("ZAKEN_API_LOPENDE_ZAKEN")
     @GetMapping(value = ["/{burgerservicenummer}/lopende-zaken"])
     suspend fun getContentStreaming(
         @PathVariable burgerservicenummer: String

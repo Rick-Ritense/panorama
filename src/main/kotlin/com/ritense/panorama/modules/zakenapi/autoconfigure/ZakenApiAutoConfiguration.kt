@@ -20,7 +20,7 @@ import com.ritense.panorama.modules.zakenapi.client.ZakenApiClient
 import com.ritense.panorama.modules.zakenapi.security.config.ZaakDocumentResourceHttpSecurityConfigurer
 import com.ritense.panorama.modules.zakenapi.service.CatalogiApiService
 import com.ritense.panorama.modules.zakenapi.service.ZakenApiService
-import com.ritense.panorama.modules.zakenapi.web.rest.ZaakDocumentResource
+import com.ritense.panorama.modules.zakenapi.web.rest.ZaakResource
 import com.ritense.panorama.security.config.PanoramaHttpSecurityConfigurer
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
@@ -79,9 +79,9 @@ class ZakenApiAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(ZaakDocumentResource::class)
-    fun zaakDocumentResource(zakenApiService: ZakenApiService): ZaakDocumentResource {
-        return ZaakDocumentResource(zakenApiService)
+    @ConditionalOnMissingBean(ZaakResource::class)
+    fun zaakDocumentResource(zakenApiService: ZakenApiService): ZaakResource {
+        return ZaakResource(zakenApiService)
     }
 
     @Bean
