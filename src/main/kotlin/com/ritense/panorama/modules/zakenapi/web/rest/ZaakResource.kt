@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController
 class ZaakResource(
     private val zakenApiService: ZakenApiService,
 ) {
-    @AuthorizedRole("ZAKEN_API_LOPENDE_ZAKEN")
+    @AuthorizedRole("ZAKEN_API_GET_ZAKEN")
     @GetMapping(value = ["/{burgerservicenummer}/lopende-zaken"])
     suspend fun getContentStreaming(
         @PathVariable burgerservicenummer: String
