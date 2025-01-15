@@ -28,4 +28,6 @@ data class Persoon(
     val verblijfplaats: AbstractVerblijfplaats? = null,
     val gemeenteVanInschrijving: Waardetabel? = null,
     val kinderen: List<Kind>? = null,
+    val partners: List<Persoon>? = null,
+    val ouders: List<Persoon>? = null,
 )
