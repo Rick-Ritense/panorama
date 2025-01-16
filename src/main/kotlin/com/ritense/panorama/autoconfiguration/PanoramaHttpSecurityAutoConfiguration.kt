@@ -32,6 +32,9 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter
 import org.springframework.security.web.header.HeaderWriterFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @EnableWebSecurity
 @EnableConfigurationProperties(PanoramaAuthorizationConfig::class)
@@ -59,7 +62,10 @@ class PanoramaHttpSecurityAutoConfiguration {
         httpSecurityConfigurers.forEach { it.configure(httpSecurity) }
 
         return httpSecurity
-            .cors { it.disable() }
+            .cors {
+                it.configurationSource(corsConfigurationSource())
+            }
+            .csrf { it.disable() }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
@@ -78,5 +84,18 @@ class PanoramaHttpSecurityAutoConfiguration {
             )
             setAuthenticationManager(panoramaAuthenticationManager)
         }
+    }
+
+    @Bean
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuration = CorsConfiguration()
+        configuration.allowedOrigins = listOf("http://localhost:4200")
+        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        configuration.allowedHeaders = listOf("Authorization", "Content-Type", "X-API-KEY")
+        configuration.allowCredentials = true
+
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
     }
 }

@@ -25,6 +25,5 @@ class PanoramaHttpSecurityConfigurer : HttpSecurityConfigurer {
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers(GET, "/api/v1/authorization/**").authenticated()
             }
-            .cors { it.disable() }
     }
 }
