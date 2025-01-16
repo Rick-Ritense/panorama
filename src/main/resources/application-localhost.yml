@@ -39,6 +39,6 @@ panorama:
       zakenapi:
         enabled: true
         properties:
-          url: http://localhost:8001
+          url: http://localhost:8004
           client-id: panorama
           secret: 7f9d2a8b1c4e0f5d3c8a9b7e1d7c9a2f
