@@ -21,8 +21,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 
 class PanoramaHttpSecurityConfigurer : HttpSecurityConfigurer {
     override fun configure(http: HttpSecurity) {
-        http.authorizeHttpRequests { auth ->
-            auth.requestMatchers(GET, "/api/v1/authorization/**").authenticated()
-        }
+        http
+            .authorizeHttpRequests { auth ->
+                auth.requestMatchers(GET, "/api/v1/authorization/**").authenticated()
+            }
+            .cors { it.disable() }
     }
 }
