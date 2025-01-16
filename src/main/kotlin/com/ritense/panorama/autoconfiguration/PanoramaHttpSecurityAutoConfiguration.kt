@@ -62,9 +62,6 @@ class PanoramaHttpSecurityAutoConfiguration {
         httpSecurityConfigurers.forEach { it.configure(httpSecurity) }
 
         return httpSecurity
-            .cors {
-                it.configurationSource(corsConfigurationSource())
-            }
             .csrf { it.disable() }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -84,18 +81,5 @@ class PanoramaHttpSecurityAutoConfiguration {
             )
             setAuthenticationManager(panoramaAuthenticationManager)
         }
-    }
-
-    @Bean
-    fun corsConfigurationSource(): CorsConfigurationSource {
-        val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("*")
-        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
-        configuration.allowedHeaders = listOf("Authorization", "Content-Type", "X-API-KEY")
-        configuration.allowCredentials = true
-
-        val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", configuration)
-        return source
     }
 }
