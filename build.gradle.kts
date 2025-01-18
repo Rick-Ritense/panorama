@@ -75,3 +75,11 @@ tasks {
         useJUnitPlatform()
     }
 }
+
+tasks.named("war") {
+    enabled = false // Disables plain WAR creation
+}
+
+tasks.named("bootWar") {
+    enabled = true // Ensures only the Spring Boot WAR is built
+}
