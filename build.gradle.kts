@@ -16,7 +16,7 @@ apply(from = "gradle/deployment.gradle.kts")
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
