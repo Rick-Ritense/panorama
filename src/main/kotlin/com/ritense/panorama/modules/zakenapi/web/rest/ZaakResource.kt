@@ -19,11 +19,17 @@ import com.ritense.panorama.contract.AuthorizedRole
 import com.ritense.panorama.modules.zakenapi.domain.ResultPage
 import com.ritense.panorama.modules.zakenapi.domain.Zaak
 import com.ritense.panorama.modules.zakenapi.service.ZakenApiService
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 @RestController
+@ConditionalOnProperty(
+    prefix = "panorama.config.modules.zakenapi",
+    name = ["enabled"],
+    havingValue = "true"
+)
 @RequestMapping(value = ["/api/v1/profile"])
 class ZaakResource(
     private val zakenApiService: ZakenApiService,
