@@ -20,6 +20,7 @@ import com.ritense.panorama.contract.AuthorizedRole
 import com.ritense.panorama.modules.haalcentraalbrp.client.RaadpleegMetBurgerservicenummerField
 import com.ritense.panorama.modules.haalcentraalbrp.domain.Persoon
 import com.ritense.panorama.modules.haalcentraalbrp.service.HaalCentraalBrpService
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -29,6 +30,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping(path = ["/api/v1/profile"])
+@ConditionalOnProperty(
+    prefix = "panorama.config.modules.haalcentraal-brp",
+    name = ["enabled"],
+    havingValue = "true"
+)
 class HaalCentraalBrpResource(private val haalCentraalBrpService: HaalCentraalBrpService) {
 
 
