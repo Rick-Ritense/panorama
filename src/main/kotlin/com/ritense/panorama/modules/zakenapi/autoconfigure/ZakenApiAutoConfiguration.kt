@@ -17,7 +17,7 @@ package com.ritense.panorama.modules.zakenapi.autoconfigure
 
 import com.ritense.panorama.modules.zakenapi.client.CatalogiApiClient
 import com.ritense.panorama.modules.zakenapi.client.ZakenApiClient
-import com.ritense.panorama.modules.zakenapi.security.config.ZaakDocumentResourceHttpSecurityConfigurer
+import com.ritense.panorama.modules.zakenapi.security.config.ZaakResourceHttpSecurityConfigurer
 import com.ritense.panorama.modules.zakenapi.service.CatalogiApiService
 import com.ritense.panorama.modules.zakenapi.service.ZakenApiService
 import com.ritense.panorama.modules.zakenapi.web.rest.ZaakResource
@@ -85,8 +85,8 @@ class ZakenApiAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(PanoramaHttpSecurityConfigurer::class)
-    fun zaakDocumentResourceHttpSecurityConfigurer(): ZaakDocumentResourceHttpSecurityConfigurer {
-        return ZaakDocumentResourceHttpSecurityConfigurer()
+    @ConditionalOnMissingBean(ZaakResourceHttpSecurityConfigurer::class)
+    fun zaakResourceHttpSecurityConfigurer(): ZaakResourceHttpSecurityConfigurer {
+        return ZaakResourceHttpSecurityConfigurer()
     }
 }

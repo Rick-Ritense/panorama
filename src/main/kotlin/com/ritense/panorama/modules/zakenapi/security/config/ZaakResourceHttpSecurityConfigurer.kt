@@ -22,7 +22,7 @@ import org.springframework.http.HttpMethod.GET
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 
 @Configuration
-class ZaakDocumentResourceHttpSecurityConfigurer : HttpSecurityConfigurer {
+class ZaakResourceHttpSecurityConfigurer : HttpSecurityConfigurer {
     override fun configure(http: HttpSecurity) {
         http.authorizeHttpRequests { authorize ->
             authorize.requestMatchers(GET, "/api/v1/profile/{burgerservicenummer}/lopende-zaken")

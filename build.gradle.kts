@@ -16,7 +16,7 @@ apply(from = "gradle/deployment.gradle.kts")
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
@@ -74,4 +74,12 @@ tasks {
     withType<Test> {
         useJUnitPlatform()
     }
+}
+
+tasks.named("war") {
+    enabled = false // Disables plain WAR creation
+}
+
+tasks.named("bootWar") {
+    enabled = true // Ensures only the Spring Boot WAR is built
 }
